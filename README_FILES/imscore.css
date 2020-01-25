@@ -1,0 +1,33 @@
+body{
+  padding: 20px 50px;
+}
+.pre-code{
+  padding: 20px;
+  width: 90%;
+  background: #333;
+  font-size: 14px;
+  color: #fff;
+}
+
+.pre-code .ins{
+  color: dodgerblue;
+}
+
+.pre-code .class{
+  color: #0db;
+}
+.pre-code .classo{
+  color: #0a9;
+}
+.pre-code .enum{
+  color: #ffb;
+}
+.pre-code .string{
+  color: burlywood;
+}
+.java-code .com {
+  color: #888;
+}
+.pre-code .como, .com{
+  color: #0a5;
+}

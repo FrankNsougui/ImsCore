@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="fr"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>ImsCore Library v1.0.30 By Frank Nsougui</title>
+    <meta name="viewport" content="width=320,  initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <meta name="description" content="">
+    <meta name="p:domain_verify" content="820543911d939770ed569ba89bab6c79">
+    <link href="README_FILES/bootstrap.min.css" rel="stylesheet">
+    <link href="README_FILES/imscore.css" rel="stylesheet">
+</head>
+<body>
+<div class="jumbotron">
+  <h1 class="display-3">ImsCore Library v1.0.30</h1>
+  <p class="lead">Insertion, Modification, Suppréssion dans une base de données.</p>
+  <hr class="my-4">
+  <p>Diminuer les pertes de temps et coder plus facilement !</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#4" role="button">plus d'infos</a>
+  </p>
+</div>
+<div class="list-group">
+  <a href="#1" class="list-group-item list-group-item-action">
+    1- Compatibilit&eacute;s (Framework et sources cibles)
+  </a>
+  <a href="#2" class="list-group-item list-group-item-action">
+	2- Ajouter ImsCore &agrave; votre projet
+  </a>
+  <a href="#3" class="list-group-item list-group-item-action">
+	3- Exemple
+  </a>
+  <a href="#31" class="list-group-item list-group-item-action">
+	3.1- Visual Studio (VB, C#, C++)
+  </a>
+  <a href="#311" class="list-group-item list-group-item-action">
+	3.1.1- Visual Basic
+  </a>
+  <a href="#312" class="list-group-item list-group-item-action">
+	3.1.2- Visual C#
+  </a>
+  <a href="#34" class="list-group-item list-group-item-action">
+	3.2- NetBeans (Java)
+  </a>
+</div>
+<br/><br/>
+<h2 id="1">1- Compatibilit&eacute;s (Framework et sources cibles)</h2>
+<p>Le tableau ci-dessous affiche la liste des IDEs, frameworks et langages compatibles avec la librairie.</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Fichier</th>
+      <th scope="col">IDEs</th>
+      <th scope="col">Framework (Cible)</th>
+      <th scope="col">Langages</th>
+      <th scope="col">SGBD</th>
+      <th scope="col">R&eacute;f&eacute;rences</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+      <th scope="row">imscore.dll</th>
+      <td>Visual Studio 2012 ou +</td>
+      <td>4.5</td>
+      <td>VB, C#, C++</td>
+      <td>Access, MySQL, SQLServer</td>
+      <td>MySQL.Data.DLL, Microsoft.ACE.OLEDB.DLL</td>
+    </tr>
+	<tr class="table-secondary">
+      <th scope="row">imscore.jar</th>
+      <td>NetBeans 6.8 ou +</td>
+      <td>-</td>
+      <td>Java</td>
+	  <td>Access, MySQL, SQLServer</td>
+	  <td>mysql-connector.jar, rsxml.jar, jcalendar.jar, sqljdbc4-0.jar, canaccess.jar</td>
+    </tr>
+  </tbody>
+ </table>
+ <p><abbr title="attribute">NB :</abbr> Les R&eacute;f&eacute;rences sont les biblioth&egrave;ques que vous devez d'abord ajouter &agrave; votre projet en premier. Elles sont fournies directement avec la biblioth&egrave;que imscore pour ceux qui ne les ont pas encore.</p>
+ <br/>
+ <p> Ensemble des m&eacute;thodes et explications</p>
+ <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">M&eacute;thodes</th>
+      <th scope="col">Type</th>
+      <th scope="col">Surcharge(s)</th>
+      <th scope="col">Param&agrave;tres</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr>
+      <th scope="row" style="color:dodgerblue;font-weight:normal">ImsCore (Visual C#, NetBeans), <br/> ImsCore.ImsCore (VB)</th>
+      <td>Contructeur</td>
+      <td>1</td>
+      <td style="color:dodgerblue;font-weight:normal">[Formulaire_Actif], SGBDProvider.Access, "[source_du_fichier.accdb]" (Access) <br /><br />
+	     [Formulaire_Actif], SGBDProvider.SQLServer "Data Source=[adresse_sqlserver];Initial Catalog=[nom_base_de_donnees];Integrated Security=True" (SQLServer) <br /> <br />
+		 [Formulaire_Actif], SGBDProvider.MySQL, "Server=[adresse_mysqlserver];Database=[nom_base_de_donnees];Uid=[utilisateur_base_de_donnees];Pwd=[mot_de_passe_base_de_donnees]" (MySQL)
+	  </td>
+    </tr>
+	<tr class="table-secondary">
+      <th scope="row" style="color:dodgerblue;font-weight:normal">newQuery</th>
+      <td>Proc&eacute;dure</td>
+      <td>4</td>
+      <td style="color:dodgerblue;font-weight:normal"><u>queryType</u> : Type de requ&ecirc;te (Insertion, Modification, Suppression ou affichage), (Obligatoire)<br /><br />
+	  <u>tableName</u> : Nom de la table dans la base de donn&eacute;es, (Obligatoire)<br /><br />
+	  <u>vs</u> : ensemble des valeurs des champs &agrave; traiter, (Obligatoire sauf pour suppression et affichage)<br /><br />
+	  <u>insertType</u> : Type d'insertion des donn&eacute;es, <br /></br />
+	  <u>cols</u> : restriction &agrave; respecter (ex: si on veut update l'age de l'id = 5, on va ecrire new Object(){"age:" + 5}), <br />
+	  <u>dataGrid</u> : le tableau o&ugrave; seront affich&eacute;es les donn&eacute;es, <br /><br />
+	  <u>expr</u> : contrainte de g&eacute;n&eacute;ration de cl&eacute; &agrave; respecter (ex: g&eacute;n&eacute;rer la cl&eacute; primaire avec une chaine commen&ccedil;ant par "ACP"), <br /><br />
+	  <u>success</u> : le texte qui sera affich&eacute; si le traitement a reussi, <br /><br />
+	  <u>warning</u> : le texte qui sera affich&eacute; si on retrouve une occurence n fois</td>
+    </tr>
+  </tbody>
+ </table>
+ <br />
+ <h2 id="2">2- Ajouter ImsCore &agrave; votre projet</h2>
+ <p>Pour ajouter ImsCore &agrave; votre projet, faites : </p>
+ <br/><br />
+ <h4>2.1- Visual Studio (VB, C#, C++)</h4>
+ <p>Par exemple mon projet se nomme <b>"ClassFood"</b>, suivez les &eacute;tapes ci-dessous : </p></br/>
+ <p> 1. Placez le curseur sur  <b>"R&eacute;f&eacute;rences"</b> </p>
+ <p> <img src="README_FILES/img.png" alt="img1" width="" height="" /> </p>
+ <p> 2. Faites clique droit et placez-vous sur <b>"Ajouter une r&eacute;f&eacute;rence"</b> </p>
+ <p> <img src="README_FILES/img2.png" alt="img2" width="" height="" /> </p>
+ <p> 3. Cliquez sur <b>"Parcourir..."</b>, placez-vous dans le dossier imscore/visual studio/ qui est soit dans un support ou dans votre disque dur et selectionnez et cochez tous les fichiers <b>".dll"</b> qui sont dans ce dossier</p>
+ <p> <img src="README_FILES/img3.png" alt="img3" width="" height="" /> </p>
+ <p> 4. V&eacute;rifier si la r&eacute;f&eacute;rence <b>"imscore"</b> a bien &eacute;t&eacute; ajout&eacute;e, et si les r&eacute;f&eacute;rences <b>"NySql.Data"</b>(MySQL) et <b>"System.Data"</b>(SQLServer et Access) sont aussi ajout&eacute;es. Si le driver d'Access n'est pas installer aller dans le dossier drivers et lancer le(s) fichier(s) <b>".exe"</b> <br />
+     <b><u>NB:</u></b> Si vous utilisez vb comme langage, les r&eacute;f&eacute;rences ne seront pas directement visibles dans l'explorateur de solution mais elles sont bel et bien pr&eacute;sentes.</p>
+ <p> <img src="README_FILES/img4.png" alt="img4" width="" height="" /> </p> 
+ <p> 6. Importer la <b>"r&eacute;f&eacute;rence"</b> en t&ecirc;te de page</p>
+ <p> 6.1 VB</p>
+ <pre class="pre-code">
+ <span class="ins">Imports</span> ImsCore</pre>
+  <p> 6.2 C#</p>
+ <pre class="pre-code">
+ <span class="ins">using</span> Imscore;</pre>
+ <br/><br />
+ <h4>2.2- NetBeans (Java)</h4>
+ <br/><br />
+ <h2 id="3">3- Exemple</h2>
+ <br/><br />
+ <h4 id="31">3.1- Visual Studio (VB, C#, C++)</h4>
+ <p> 1. Soit le formulaire <b>"Form1"</b> avec pour SGBD (MySQL) contenant la table <b>"Table1</b> : </p>
+ <p> <img src="README_FILES/img5.png" alt="img5" width="" height="" /> </p>
+ <p> <ul>
+		<li> <b>id</b> : textBox1 (en lecture seule)</li>
+		<li> <b>age</b> : textBox1</li>
+		<li> <b>Datenaiss</b> : dateTimePicker1</li>
+		<li> <b>le rectangle en blanc</b> : dataGridView1</li>
+	</ul></p>
+ <p> 2. le code correspondant &agrave; cette fen&ecirc;tre est le suivant </p>
+ <h5 id="311"> 3.1.1 Visueal Basic</h5>
+ <pre class="pre-code">
+<span class="ins">Imports</span> Imscore
+
+<span class="ins">Public Class</span> <span class="class">Form1</span>
+
+    <span class="como">' Creer une instance de la classe ImsCore</span>
+    <span class="como">' le caractere _ permet d'aller à la ligne</span>
+    <span class="ins">Dim</span> o <span class="ins">As New</span> Imscore.<span class="class">ImsCore</span>(ActiveForm, <span class="enum">SGBDProvider</span>.MySQL, <span class="string">"Server=localhost;Database=classfood;Uid=root;Pwd="</span>)
+	
+    <span class="como">' Lorsque le formulaire se charge</span>
+    <span class="ins">Private Sub</span> Form1_Load(sender <span class="ins">As Object</span>, e <span class="ins">As</span> <span class="class">EventArgs</span>) <span class="ins">Handles MyBase</span>.Load
+        
+        <span class="como">' Charge les données de la bd dans le dataGridView1</span>
+        o.newQuery(<span class="enum">QueryType</span>.View, <span class="string">"Table1"</span>, DataGridView1)
+		
+    <span class="ins">End Sub</span>
+
+    <span class="como">' Lorsqu'on clique sur le bouton Enregistrer</span>
+    <span class="ins">Private Sub</span> Enregistrer_Click(sender <span class="ins">As Object</span>, e <span class="ins">As</span> <span class="class">EventArgs</span>) <span class="ins">Handles</span> Enregistrer.Click
+        
+        <span class="como">' On insert les données dans la table "Table1"</span>
+        o.newQuery(<span class="enum">QueryType</span>.Insert, <span class="string">"Table1"</span>, _
+           <span class="ins">New Object</span>() { _
+               <span class="ins">CInt</span>(TextBox3.Text), _
+               <span class="classo">DateTime</span>.Parse(DateTimePicker1.Value.ToShortDateString()) _
+           }, _
+           <span class="enum">InsertType</span>.AutoIncrement, _
+           <span class="ins">New Object</span>() { _
+               <span class="string">"age"</span> _
+           }, _
+           DataGridView1, _
+           <span class="ins">Nothing</span>, _
+           success:=<span class="string">"Enregistre !"</span>, warning:=<span class="string">"Doublon"</span>)
+		   
+    <span class="ins">End Sub</span>
+	
+    <span class="como">' Lorsqu'on clique sur le bouton Modifier</span>
+    <span class="ins">Private Sub</span> Modifier_Click(sender <span class="ins">As Object</span>, e <span class="ins">As</span> <span class="class">EventArgs</span>) <span class="ins">Handles</span> Modifier.Click
+        
+        <span class="como">' On update les données la table "Table1" de l'id = 5</span>
+        o.newQuery(<span class="enum">QueryType</span>.Update, <span class="string">"Table1"</span>, _
+           <span class="ins">New Object</span>() { _
+               <span class="string">"age:"</span> & <span class="ins">CInt</span>(TextBox3.Text), _
+               <span class="string">"datenaiss:#"</span> & <span class="classo">DateTime</span>.Parse(DateTimePicker1.Value.ToShortDateString()) & <span class="string">"#"</span> _
+           }, _
+           <span class="enum">InsertType</span>.Nothing, _
+           <span class="ins">New Object</span>() { _
+               <span class="string">"id:"</span> & 5 _
+           },
+           DataGridView1, _
+           <span class="ins">Nothing</span>, _
+           success:=<span class="string">"Modifié !"</span>, warning:=<span class="ins">Nothing</span>)
+		   
+    <span class="ins">End Sub</span>
+	
+	<span class="como">' Lorsqu'on clique sur le bouton Supprimer</span>
+    <span class="ins">Private Sub</span> Supprimer_Click(sender <span class="ins">As Object</span>, e <span class="ins">As</span> <span class="class">EventArgs</span>) <span class="ins">Handles</span> Supprimer.Click
+        
+        <span class="como">' On supprime les données la table "Table1" de l'id = 5</span>
+        o.newQuery(<span class="enum">QueryType</span>.Delete, <span class="string">"Table1"</span>, <span class="string">"id:"</span> & 5, success:= <span class="string">"Supprimé !"</span>)
+		   
+    <span class="ins">End Sub</span>
+	
+	<span class="como">' Lorsqu'on clique sur une ligne du dataGridView1</span>
+    <span class="ins">Private Sub</span> DataGridView1_CellClick(sender <span class="ins">As Object</span>, e <span class="ins">As</span> <span class="class">DataGridViewCellEventArgs</span>) <span class="ins">Handles</span> DataGridView1.CellClick
+        
+        <span class="como">' Charge les données du dataGridView1 dans les champs respectifs</span>
+        o.newQuery(<span class="enum">QueryType</span>.View, <span class="string">"Table1"</span>, dataGridView1.CurrentCell.RowIndex, dataGridView1, _ 
+                <span class="ins">New Object</span>() _
+                { _
+                    textBox1, _
+                    textBox2, _
+                    dateTimePicker1 _
+                })
+    <span class="ins">End Sub</span>
+	
+<span class="ins">End Class</span>
+
+ </pre>
+  <h5 id="312"> 3.1.2 Visual C#</h5>
+ <pre class="pre-code">
+<span class="ins">using</span> System;
+<span class="ins">using</span> System.Windows.Forms;
+<span class="ins">using</span> Imscore;
+
+<span class="ins">namespace</span> ClassFood
+{
+    <span class="ins">public partial class</span> <span class="class">Form1</span> : <span class="class">Form</span>
+    {
+	<span class="com">// Creer une instance de la classe ImsCore</span>
+        <span class="class">ImsCore</span> o =  <span class="ins">new</span> <span class="class">ImsCore</span>(<span class="classo">Form1</span>.ActiveForm, <span class="enum">SGBDProvider</span>.MySQL, <span class="string">@"Server=localhost;Database=classfood;Uid=root;Pwd="</span>);
+
+        <span class="ins">public</span> Form1()
+        {
+            InitializeComponent();
+        }
+
+	<span class="com">// Lorsque le formulaire se charge</span>
+        <span class="ins">private void</span> Form1_Load(<span class="ins">object</span> sender, <span class="class">EventArgs</span> e)
+        {
+	    <span class="com">// Charge les données de la bd dans le dataGridView1</span>
+            o.newQuery(<span class="enum">QueryType</span>.View, <span class="string">"Table1"</span>, dataGridView1);
+			
+        }
+
+	<span class="com">// Lorsqu'on clique sur le bouton Enregistrer</span>
+        <span class="ins">private void</span> Enregistrer_Click(<span class="ins">object sender</span>, <span class="class">EventArgs</span> e)
+        {
+	    <span class="com">// On insert les données dans la table "Table1"</span>
+            o.newQuery(<span class="enum">QueryType</span>.Insert, <span class="string">"Table1"</span>,
+                <span class="ins">new object</span>[]
+                {
+                    <span class="ins">int</span>.Parse(textBox2.Text),
+                    <span class="class">DateTime</span>.Parse(dateTimePicker1.Value.ToString())
+                },
+                <span class="enum">InsertType</span>.AutoIncrement,
+                <span class="ins">new object</span>[]
+                {
+                    <span class="string">"age"</span>
+                }, dataGridView1,
+                <span class="ins">null</span>, success: <span class="string">"Enregistré !"</span>, warning:  <span class="string">"Existe déjà !"</span>);
+        }
+		
+		
+	<span class="com">// Lorsqu'on clique sur le bouton Modifier</span>
+        <span class="ins">private void</span> Modifier_Click(<span class="ins">object sender</span>, <span class="class">EventArgs</span> e)
+        {
+	    <span class="com">// On update les données la table "Table1" de l'id = 5</span>
+            o.newQuery(<span class="enum">QueryType</span>.Update, <span class="string">"Table1"</span>,
+                <span class="ins">new object</span>[]
+                {
+                    <span class="string">"age:"</span> + <span class="ins">int</span>.Parse(textBox2.Text),
+                    <span class="string">"datenaiss:#"</span> + <span class="class">DateTime</span>.Parse(dateTimePicker1.Value.ToString()) + <span class="string">"#"</span>
+                },
+                <span class="enum">InsertType</span>.Nothing,
+                <span class="ins">new object</span>[]
+                {
+                    <span class="string">"id:"</span> + 5
+                }, dataGridView1,
+                <span class="ins">null</span>, success: <span class="string">"modifié !"</span>, warning:  <span class="ins">null</span>);
+        }
+		
+		
+	<span class="com">// Lorsqu'on clique sur le bouton Supprimer</span>
+        <span class="ins">private void</span> Supprimer_Click(<span class="ins">object sender</span>, <span class="class">EventArgs</span> e)
+        {
+	    <span class="com">// On supprime les données la table "Table1" de l'id = 5</span>
+            o.newQuery(<span class="enum">QueryType</span>.Delete, <span class="string">"Table1"</span>, <span class="string">"id:"</span> + 5, success: <span class="string">"Supprimé !"</span>);
+        }
+		
+	<span class="com">// Lorsqu'on clique sur une ligne du dataGridView1</span>
+        <span class="ins">private void</span> dataGridView1_CellClick(<span class="ins">object</span> sender, <span class="class">DataGridViewCellEventArgs</span> e)
+        {
+            <span class="com">// Charge les données du dataGridView1 dans les champs respectifs </span>
+            o.newQuery(<span class="enum">QueryType</span>.View, <span class="string">"Table1"</span>, dataGridView1.CurrentCell.RowIndex, dataGridView1, 
+                <span class="ins">new object</span>[]
+                {
+                    textBox1,
+                    textBox2,
+                    dateTimePicker1
+                });
+        }
+    }
+}
+</pre>
+ <br/><br />
+ <h4 id="34">3.2- NetBeans (Java)</h4>
+ <br/><br />
+ <h4 id="4">4.- Plus d'infos</h4>
+ <p> Veuillez me contacter au : </p>
+ <ul>
+	<li>(+237) 656 375 365 (WhatsApp)</li>
+	<li>(+237) 652 610 026</li>
+	<li>devinferno16@gmail.com</li>
+ </ul>
+</body>
+</html>
